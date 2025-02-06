@@ -1,0 +1,15 @@
+{
+    "name": "youcode/php-mvc-postgre-sql",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kaoutarlabjioui",
+            "email": "kalabjioui@gmail.com"
+        }
+    ],
+    "require": {}
+}
