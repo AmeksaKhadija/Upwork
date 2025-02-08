@@ -26,6 +26,14 @@ create table competences (
     level VARCHAR(225)
 );
 
+CREATE TABLE freelance_competence (
+    freelance_id INT,
+    competence_id INT,
+    FOREIGN KEY (freelance_id) REFERENCES users (id),
+    FOREIGN KEY (competence_id) REFERENCES competences (id),
+    PRIMARY KEY (freelance_id, competence_id)
+);
+
 CREATE table categories (
      id SERIAL PRIMARY KEY ,
     name VARCHAR(50) UNIQUE,
@@ -39,16 +47,20 @@ CREATE TABLE tags (
     logo VARCHAR(225)
 ) ;
 
-create table projects(
+CREATE TYPE status AS ENUM ('à faire','en cours','terminé');
+ CREATE TABLE projets(
     id SERIAL PRIMARY key ,
     titre VARCHAR(225),
     description text,
     budget DECIMAL,
     date_debut date,
     date_fin date,
-    status 
-)
-
+    categorie_id INT,
+    client_id int,
+    status status,
+     FOREIGN KEY (client_id) REFERENCES users (id),
+    FOREIGN KEY (categorie_id) REFERENCES categories (id)
+);
 
 CREATE TABLE projets_tags (
     projet_id INT,
@@ -57,5 +69,51 @@ CREATE TABLE projets_tags (
     FOREIGN KEY (tag_id) REFERENCES tags (id),
     PRIMARY KEY (projet_id, tag_id)
 ) ;
+
+create type paiement_status as ENUM ('Non payé','payé');
+CREATE table paiements(
+    int SERIAL PRIMARY key ,
+    amount DECIMAL,
+    status paiement_status ,
+    type VARCHAR(225),
+    paye_id int,
+    payeur_id  INT,
+    FOREIGN KEY (paye_id) REFERENCES users (id),
+    FOREIGN KEY (payeur_id) REFERENCES users (id)
+);
+
+create table messages(
+    id SERIAL primary key ,
+    contenu text ,
+    sender_id int ,
+    receiver_id int 
+    FOREIGN KEY (sender_id) REFERENCES users (id),
+    FOREIGN KEY (receiver_id) REFERENCES users (id)
+);
+
+create table reviews (
+    id SERIAL PRIMARY key ,
+    rating int CHECK (rating >= 0 AND rating <= 5),
+    commentaire text,
+    reviewer_id int ,
+    FOREIGN KEY (reviewer_id) REFERENCES users (id)
+);
+create type propo_status as ENUM ('pending','accepted','rejected');
+create  table propositions(
+    id serial PRIMARY key ,
+    amount DECIMAL,
+    status propo_status,
+    freelance_id int ,
+    projet_id int ,
+    FOREIGN KEY (freelance_id) REFERENCES users (id),
+    FOREIGN KEY (projet_id) REFERENCES projets (id)
+
+);
+
+
+
+
+
+
 
 

@@ -13,7 +13,7 @@ class Database
     private static $instance;
     public static $counter = 0;
 
-    public function __construct(){
+    private function __construct(){
         if (!self::$connexion) {
             try {
                
