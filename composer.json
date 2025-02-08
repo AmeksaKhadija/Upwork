@@ -1,5 +1,5 @@
 {
-    "name": "youcode/php-mvc-postgre-sql",
+    "name": "youcode/upwork",
     "autoload": {
         "psr-4": {
             "app\\": "app/"

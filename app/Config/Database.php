@@ -8,7 +8,7 @@ class Database
     private static $username = "postgres";
     private static $password = "0000";
     private static $port = "5432";
-    private static $dbname = "postgres";
+    private static $dbname = "upwork";
     private static $connexion;
     private static $instance;
     public static $counter = 0;
