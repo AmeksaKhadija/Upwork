@@ -14,7 +14,7 @@ class AuthController extends Controller
 
     public function signup()
     {
-        echo 'compte created';
+        $this->render('Signup');
     }
 
 

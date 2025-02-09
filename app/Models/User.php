@@ -1,6 +1,9 @@
 <?php
 namespace app\Models;
-
+use Exception;
+use PDO;
+use app\Config\Database;
+use app\Models\Role;
 
 class User 
 {
@@ -10,6 +13,9 @@ class User
     private string $prenom;
     private string $email;
     private string $password;
+    private string $photo;
+    private Role $role;
+    private float $taux_horaire;
 
 
     public function __construct(){}
