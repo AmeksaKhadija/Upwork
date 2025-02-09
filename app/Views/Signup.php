@@ -313,6 +313,29 @@
             </div>
 
             <div class="form-group">
+                <label for="photo">Photo</label>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="url" id="photo" name="photo" placeholder="Entrez votre photo" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="portfolio">Portfolio</label>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="url" id="portfolio" name="portfolio" placeholder="Entrez votre lien portfolio" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="tauxhoraire">Taux d'horaire</label>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="number" id="tauxhoraire" name="tauxhoraire" placeholder="Entrez votre tauxhoraire" >
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label for="email">Adresse email</label>
                 <div class="input-group">
                     <i class="fas fa-envelope"></i>

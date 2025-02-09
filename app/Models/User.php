@@ -60,7 +60,10 @@ class User
    {
     $this->taux_horaire = $taux_horaire;
    }
-
+   public function setPortfolio(string $portfolio):void
+   {
+    $this->portfolio = $portfolio;
+   }
     public function getId(): int
     {
         return $this->id;
@@ -95,6 +98,12 @@ class User
     {
        return $this->taux_horaire;
     }
+
+    public function getPortfolio()
+    {
+       return $this->portfolio;
+    }
+ 
  
 
     // public function __toString()
@@ -109,14 +118,16 @@ class User
         $id= $this->role->getId();
         $query = "insert into users (nom,prenom,email,password,photo,taux_horaire , role_id,portfolio) values (:nom,:prenom,:email,:password,:photo,:taux_horaire,:role_id,:portfolio)";
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
+
         $stmt = Database::getInstance()->getConnection()->prepare($query);
         $stmt->bindParam(':nom',$this->nom);
         $stmt->bindParam(':prenom',$this->prenom);
         $stmt->bindParam(':email',$this->email);
         $stmt->bindParam(':password',$hashedPassword);
-        $stmt->bindParam(':photo', $photo);
+        $stmt->bindParam(':taux_horaire',$this->taux_horaire);
+        $stmt->bindParam(':photo', $this->photo);
         $stmt->bindParam(':role_id', $id);
-        $stmt->bindParam(':portfolio', $portfolio);
+        $stmt->bindParam(':portfolio', $this->portfolio);
 
         return $stmt->execute();
 
