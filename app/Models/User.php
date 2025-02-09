@@ -1,6 +1,9 @@
 <?php
 namespace app\Models;
-
+use Exception;
+use PDO;
+use app\Config\Database;
+use app\Models\Role;
 
 class User 
 {
@@ -10,6 +13,10 @@ class User
     private string $prenom;
     private string $email;
     private string $password;
+    private string $photo;
+    private Role $role;
+    private string $portfolio;
+    private float $taux_horaire;
 
 
     public function __construct(){}
@@ -39,6 +46,21 @@ class User
         $this->password = $password;
     }
 
+    public function setPhoto(string $photo):void
+    {
+        $this->photo = $photo;
+    }
+
+    public function setRole(Role $role):void
+    {
+       $this->role = $role;
+   }
+    
+   public function setTauxHoraire(float $taux_horaire):void
+   {
+    $this->taux_horaire = $taux_horaire;
+   }
+
     public function getId(): int
     {
         return $this->id;
@@ -60,11 +82,88 @@ class User
         return $this->password;
     }
 
-    public function __toString()
+    public function getPhoto(): string {
+        return $this->photo;
+    }
+
+    
+    public function getRole(): Role {
+        return $this->role;
+    }
+
+    public function getTauxHoraire()
     {
-         return "(Utilisateur) => id : " . $this->id . " , nom : " . $this->nom . 
-                 " , prenom : " . $this->prenom ." , email : " . $this->email  . 
-                 " , password : " . $this->password ."." ;
-     }
+       return $this->taux_horaire;
+    }
+ 
+
+    // public function __toString()
+    // {
+    //      return "(Utilisateur) => id : " . $this->id . " , nom : " . $this->nom . 
+    //              " , prenom : " . $this->prenom ." , email : " . $this->email  . 
+    //              " , password : " . $this->password ."." ;
+    // }
+
+    public function create()
+    {
+        $id= $this->role->getId();
+        $query = "insert into users (nom,prenom,email,password,photo,taux_horaire , role_id,portfolio) values (:nom,:prenom,:email,:password,:photo,:taux_horaire,:role_id,:portfolio)";
+        $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
+        $stmt = Database::getInstance()->getConnection()->prepare($query);
+        $stmt->bindParam(':nom',$this->nom);
+        $stmt->bindParam(':prenom',$this->prenom);
+        $stmt->bindParam(':email',$this->email);
+        $stmt->bindParam(':password',$hashedPassword);
+        $stmt->bindParam(':photo', $photo);
+        $stmt->bindParam(':role_id', $id);
+        $stmt->bindParam(':portfolio', $portfolio);
+
+        return $stmt->execute();
+
+    }
+
+    public function delete($id)
+    {
+        $query = "delete from users where id= :id";
+        $stmt=Database::getInstance()->getConnection()->prepare($query);
+        $stmt->bindParam(':id',$id);
+        return $stmt->execute();
+    }
+
+
+
+    public function findByEmail($email){
+
+        $query = "select id, nom,prenom ,email, password,role_id from users where email =:email";
+        $stmt=Database::getInstance()->getConnection()->prepare($query);
+        $stmt->bindParam(':email' ,$email);
+        $stmt->execute();
+        return $stmt->fetchObject(__CLASS__);
+    }
+
+
+    public function login($email , $password)
+    {
+        $result = $this->findByEmail($email);
+        $role = new Role;
+        $role = $role->findById($result->role_id);
+        $result->setRole($role);
+
+        if ($result && $password == $result->password){
+            return $result ;
+        } else {
+            return false;
+        }
+
+    }
+
+
+
+
+
+
+
+
+
 
 }

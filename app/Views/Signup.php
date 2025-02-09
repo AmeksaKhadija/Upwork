@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Inscription</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
@@ -60,7 +60,7 @@
             text-decoration: none;
         }
 
-        .login-container {
+        .signup-container {
             max-width: 500px;
             margin: 4rem auto;
             padding: 2.5rem;
@@ -122,7 +122,7 @@
             color: #64748b;
         }
 
-        input {
+        input, select {
             width: 100%;
             padding: 1.1rem;
             padding-left: 3rem;
@@ -133,11 +133,48 @@
             background-color: #f8fafc;
         }
 
-        input:focus {
+        input:focus, select:focus {
             outline: none;
             border-color: var(--primary);
             background-color: white;
             box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .input-group.select-group::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            pointer-events: none;
+        }
+
+        .password-requirements {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #64748b;
+            padding-left: 0.5rem;
+        }
+
+        .requirement {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .requirement i {
+            font-size: 0.9rem;
+            color: var(--success);
         }
 
         .btn-submit {
@@ -155,6 +192,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.7rem;
+            margin-top: 0.5rem;
         }
 
         .btn-submit:hover {
@@ -182,7 +220,7 @@
             font-size: 0.95rem;
         }
 
-        .social-login {
+        .social-signup {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.2rem;
@@ -209,25 +247,25 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
-        .signup-link {
+        .login-link {
             text-align: center;
             margin-top: 2.2rem;
             color: #64748b;
             font-size: 1rem;
         }
 
-        .signup-link a {
+        .login-link a {
             color: var(--primary);
             text-decoration: none;
             font-weight: 600;
         }
 
-        .signup-link a:hover {
+        .login-link a:hover {
             text-decoration: underline;
         }
 
         @media (max-width: 768px) {
-            .login-container {
+            .signup-container {
                 margin: 2rem;
                 padding: 1.8rem;
             }
@@ -251,13 +289,29 @@
         </div>
     </nav>
 
-    <div class="login-container">
+    <div class="signup-container">
         <div class="form-header">
-            <h1>Connectez-vous</h1>
-            <p>Ravi de vous revoir parmi nous</p>
+            <h1>Créez votre compte</h1>
+            <p>Rejoignez notre communauté</p>
         </div>
 
-        <form action="/auth/Login" method="POST">
+        <form action="./Signup" method="POST">
+            <div class="form-group">
+                <label for="nom">Nom</label>
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="nom" name="nom" placeholder="Entrez votre nom" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="prenom">Prénom</label>
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="prenom" name="prenom" placeholder="Entrez votre prénom" required>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="email">Adresse email</label>
                 <div class="input-group">
@@ -267,23 +321,50 @@
             </div>
 
             <div class="form-group">
-                <label for="password">Mot de passe</label>
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+                <label for="role">Rôle</label>
+                <div class="input-group select-group">
+                    <i class="fas fa-user-graduate"></i>
+                    <select id="role" name="role" required>
+                        <option value="" disabled selected>Sélectionnez votre rôle</option>
+                        <option value="client">Client</option>
+                        <option value="freelancer">Freelancer</option>
+                    </select>
                 </div>
             </div>
 
-            <button type="submit" class="btn-submit" name="submit" value="login">
-                <i class="fas fa-sign-in-alt"></i>
-                Se connecter
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="Créez votre mot de passe" required>
+                </div>
+                
+                <div class="password-requirements">
+                    <div class="requirement">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Minimum 8 caractères</span>
+                    </div>
+                    <div class="requirement">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Au moins une majuscule</span>
+                    </div>
+                    <div class="requirement">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Au moins un chiffre</span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit" name="submit" value="signup">
+                <i class="fas fa-user-plus"></i>
+                Créer mon compte
             </button>
 
             <div class="divider">
-                <span>ou connectez-vous avec</span>
+                <span>ou inscrivez-vous avec</span>
             </div>
 
-            <div class="social-login">
+            <div class="social-signup">
                 <a href="#" class="social-btn">
                     <i class="fab fa-google"></i>
                     Google
@@ -293,10 +374,9 @@
                     Facebook
                 </a>
             </div>
-            <!-- to do fix url to -->
-            <div class="signup-link">
-                Pas encore membre ? <a href="/auth/signup">Inscrivez-vous</a>
-              
+
+            <div class="login-link">
+                Déjà membre ? <a href="/Auth">Connectez-vous</a>
             </div>
         </form>
     </div>
