@@ -511,17 +511,9 @@
                 </a>
             </li>
         </ul>
-        <div class="user-profile">
-            <div class="profile-main">
-                <div class="avatar">JD</div>
-                <div class="user-info">
-                    <div class="user-name">John Doe</div>
-                    <div class="user-role">Admin</div>
-                </div>
-            </div>
-            <div class="user-menu">
-                <a href="/profile" class="user-menu-item">
-                    <i class="fas fa-user"></i>
-                    Mon profil
-                </a>
-                <a href="/settings" class
+        <a href="/Auth/logout" class="logout-button">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Déconnexion</span>
+        </a>
+
+                

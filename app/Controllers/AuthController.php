@@ -29,8 +29,39 @@ class AuthController extends Controller
         $password = htmlspecialchars($_POST['password']);
         $photo = htmlspecialchars($_POST['photo']);
         $portfolio = htmlspecialchars($_POST['portfolio']);
+        $tauxhoraire= htmlspecialchars($_POST['tauxhoraire']);
         $roleName = htmlspecialchars($_POST['role']);
+
+        $errors = [];
+
+        if(empty($nom) || empty($prenom) ||empty($photo)||empty($portfolio)||  !filter_var($email,FILTER_VALIDATE_EMAIL )){
+
+            echo $errors['general'] = "Veuillez remplir tous les champs correctement.";
+        }
+
+        if (empty($password)|| !preg_match('/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/', $password)){
+            echo  $errors['password'] = "Le mot de passe doit contenir au moins 8 caractères, une lettre et un chiffre.";
+        }
+
+        if (empty($errors)){
+            $this->userModel->setNom($nom);
+            $this->userModel->setPrenom($prenom);
+            $email = $this->userModel->setEmail($email);
+            $password = $this->userModel->setPassword($password);
+            $this->userModel->setPhoto($photo);
+            $this->userModel->setPortfolio($portfolio);
+            $this->userModel->setTauxHoraire($tauxhoraire);
+            $this->userModel->setRole($this->roleModel->findByName($roleName));
+
+            if ($this->userModel->create()){
+                $this->render('Login');
+            }
+        } else {
+            echo $errors['general'];
+        }
         
+       } else {
+        $this->render('Signup');
        }
     }
 
@@ -53,6 +84,7 @@ class AuthController extends Controller
             if (empty($errors)){
 
                 $user= $this->userModel->login($email, $password);
+                $this->render('Dashboard');
                 if($user) {
                     $_SESSION['nom'] = $user->getNom();
                     $_SESSION['prenom'] = $user->getPrenom();
@@ -61,7 +93,9 @@ class AuthController extends Controller
                     $_SESSION['user_id'] = $user->getId();
                     $_SESSION['user'] = $user;
 
-                    header('location:/');
+                    // header('location:/');
+                 
+                    
                 }
             }
 
