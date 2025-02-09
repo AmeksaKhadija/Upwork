@@ -6,9 +6,9 @@ class Database
 {
     private static $servername = "localhost";
     private static $username = "postgres";
-    private static $password = "0000";
+    private static $password = "khadija24";
     private static $port = "5432";
-    private static $dbname = "postgres";
+    private static $dbname = "Upwork";
     private static $connexion;
     private static $instance;
     public static $counter = 0;

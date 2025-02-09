@@ -1,5 +1,5 @@
 {
-    "name": "youcode/php-mvc-postgre-sql",
+    "name": "youcode/upwork",
     "autoload": {
         "psr-4": {
             "app\\": "app/"
@@ -7,8 +7,8 @@
     },
     "authors": [
         {
-            "name": "kaoutarlabjioui",
-            "email": "kalabjioui@gmail.com"
+            "name": "Ameksa khadija",
+            "email": "ameksakhadija026@gmail.com"
         }
     ],
     "require": {}
