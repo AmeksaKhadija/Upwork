@@ -281,6 +281,8 @@
     </style>
 </head>
 <body>
+
+
     <nav>
         <div class="nav-container">
             <a href="/Home" class="logo">Upwork</a>

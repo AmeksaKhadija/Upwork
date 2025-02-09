@@ -5,7 +5,7 @@ class Role
 {
     private int $id=0;
     private string $role_name;
-    private string $role_description="";
+    private string $description="";
     
     public function __construct(){}
 
@@ -20,7 +20,7 @@ class Role
             if(count($arguments) == 2)
             {
                 $this->role_name=$arguments[0];
-                $this->role_description=$arguments[1];
+                $this->description=$arguments[1];
             }
             
         }
@@ -43,9 +43,9 @@ class Role
         $this->role_name=$role_name;
     }
 
-    public function setRoleDescription(string $role_description)
+    public function setDescription(string $role_description)
     {
-    $this->role_description=$role_description;
+    $this->description=$role_description;
     }
 
 
@@ -59,15 +59,15 @@ class Role
         return $this->role_name;
     }
 
-    public function getRoleDescription():string
+    public function getDescription():string
     {
-        return $this->role_description;
+        return $this->description;
     }
 
 
     public function __toString()
     {
-        return "(role) => id : " .$this->id. " , name : " .$this->role_name. " , description : " .$this->role_description." .";
+        return "(role) => id : " .$this->id. " , name : " .$this->role_name. " , description : " .$this->description." .";
     }
 
 
@@ -75,10 +75,10 @@ class Role
     public function create(){
 
 
-        $query="insert into roles (role_name,role_description) values (:role_name,:role_description) ";
+        $query="insert into roles (role_name,description) values (:role_name,:description) ";
         $stmt= Database::getInstance()->getConnection()->prepare($query);
         $stmt->bindParam(':role_name',$this->role_name);
-        $stmt->bindParam(':role_description',$this->role_description);
+        $stmt->bindParam(':description',$this->description);
         $stmt->execute();
 
         return  $this->setId(Database::getInstance()
@@ -92,7 +92,7 @@ class Role
     public function findByName($name)
     {
         //  $fid=$this->getName();
-        $query="select id ,role_name,role_description from roles where role_name=:name";
+        $query="select id ,role_name,description from roles where role_name=:name";
         $stmt=Database::getInstance()->getConnection()->prepare($query);
         $stmt->bindParam(':name',$name );
         $stmt->execute();
@@ -106,17 +106,14 @@ class Role
     public function findById($id)
     {
         //  $fid=$this->getName();
-        $query="select id ,role_name,role_description   from roles where id=:id";
+        $query="select id ,role_name,description   from roles where id=:id";
         $stmt=Database::getInstance()->getConnection()->prepare($query);
         $stmt->bindParam(':id',$id);
         $stmt->execute();
 
        $result=$stmt->fetchObject(__CLASS__);
-    return $result;
-    
-      
+        return $result;
+
     }
-
-
 
 }

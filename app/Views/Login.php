@@ -243,6 +243,8 @@
     </style>
 </head>
 <body>
+
+
     <nav>
         <div class="nav-container">
             <a href="/Home" class="logo">Upwork</a>
@@ -255,7 +257,7 @@
             <p>Ravi de vous revoir parmi nous</p>
         </div>
 
-        <form action="./Login" method="POST">
+        <form action="/auth/Login" method="POST">
             <div class="form-group">
                 <label for="email">Adresse email</label>
                 <div class="input-group">
@@ -291,9 +293,10 @@
                     Facebook
                 </a>
             </div>
-
+            <!-- to do fix url to -->
             <div class="signup-link">
                 Pas encore membre ? <a href="/auth/signup">Inscrivez-vous</a>
+              
             </div>
         </form>
     </div>

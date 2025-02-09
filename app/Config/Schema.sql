@@ -61,6 +61,8 @@ CREATE TYPE status AS ENUM ('à faire','en cours','terminé');
      FOREIGN KEY (client_id) REFERENCES users (id),
     FOREIGN KEY (categorie_id) REFERENCES categories (id)
 );
+ALTER TABLE projets
+ALTER COLUMN status SET DEFAULT 'à faire';
 
 CREATE TABLE projets_tags (
     projet_id INT,
@@ -81,6 +83,8 @@ CREATE table paiements(
     FOREIGN KEY (paye_id) REFERENCES users (id),
     FOREIGN KEY (payeur_id) REFERENCES users (id)
 );
+ALTER TABLE paiements
+ALTER COLUMN  status SET DEFAULT 'Non payé';
 
 create table messages(
     id SERIAL primary key ,
@@ -109,6 +113,15 @@ create  table propositions(
     FOREIGN KEY (projet_id) REFERENCES projets (id)
 
 );
+ALTER TABLE propositions
+ALTER COLUMN status SET DEFAULT 'pending';
+
+ insert into roles (role_name,description) values ('freelancer','role freelancer');
+
+ 
+alter table users 
+ADD COLUMN portfolio varchar(225);
+
 
 
 
