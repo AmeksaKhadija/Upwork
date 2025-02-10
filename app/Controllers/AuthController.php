@@ -85,6 +85,8 @@ class AuthController extends Controller
 
                 $user= $this->userModel->login($email, $password);
                 $this->render('Dashboard');
+                // var_dump($user);
+                // die;
                 if($user) {
                     $_SESSION['nom'] = $user->getNom();
                     $_SESSION['prenom'] = $user->getPrenom();
@@ -92,10 +94,9 @@ class AuthController extends Controller
                     $_SESSION['role'] = $user->getRole();
                     $_SESSION['user_id'] = $user->getId();
                     $_SESSION['user'] = $user;
-
+                    // var_dump($user);
+                    // die();
                     // header('location:/');
-                 
-                    
                 }
             }
 

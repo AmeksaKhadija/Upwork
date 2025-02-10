@@ -58,7 +58,7 @@ CREATE TYPE status AS ENUM ('à faire','en cours','terminé');
     categorie_id INT,
     client_id int,
     status status,
-     FOREIGN KEY (client_id) REFERENCES users (id),
+    FOREIGN KEY (client_id) REFERENCES users (id),
     FOREIGN KEY (categorie_id) REFERENCES categories (id)
 );
 ALTER TABLE projets

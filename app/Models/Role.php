@@ -99,8 +99,7 @@ class Role
 
        $result=$stmt->fetchObject(__CLASS__);
     return $result;
-    
-      
+
     }
 
     public function findById($id)
