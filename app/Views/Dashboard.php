@@ -45,7 +45,6 @@
             flex-direction: column;
             position: fixed;
             height: 100vh;
-            z-index: 1000;
         }
 
         .logo {
@@ -91,22 +90,11 @@
         }
 
         .user-profile {
-            position: relative;
+            display: flex;
+            align-items: center;
             padding: 1rem;
             border-top: 2px solid rgba(0, 0, 0, 0.05);
             margin-top: auto;
-            cursor: pointer;
-        }
-
-        .user-profile:hover .user-menu {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .profile-main {
-            display: flex;
-            align-items: center;
         }
 
         .avatar {
@@ -136,56 +124,14 @@
             color: #64748b;
         }
 
-        .user-menu {
-            display: none;
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            margin: 0.5rem;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-        }
-
-        .user-menu-item {
-            display: flex;
-            align-items: center;
-            padding: 0.8rem 1rem;
-            color: var(--dark);
-            text-decoration: none;
-            transition: all 0.2s ease;
-            border-radius: 8px;
-            margin: 0.3rem;
-        }
-
-        .user-menu-item:hover {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--primary);
-        }
-
-        .user-menu-item i {
-            margin-right: 0.8rem;
-            width: 20px;
-            text-align: center;
-        }
-
-        .user-menu-item.logout {
-            color: var(--error);
-        }
-
-        .user-menu-item.logout:hover {
-            background: rgba(239, 68, 68, 0.1);
-        }
-
         /* Main Content Styles */
         .main-content {
             flex: 1;
             margin-left: 280px;
             padding: 2rem;
+        }
+        .user-menu-item.logout {
+            color: var(--error);
         }
 
         .header {
@@ -195,20 +141,10 @@
             margin-bottom: 2rem;
         }
 
-        .welcome-header {
-            margin-bottom: 2rem;
-        }
-
-        .welcome-title {
+        .page-title {
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .welcome-subtitle {
-            color: #64748b;
-            font-size: 1.1rem;
         }
 
         .stats-grid {
@@ -223,12 +159,6 @@
             padding: 1.5rem;
             border-radius: 16px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
         }
 
         .stat-header {
@@ -245,7 +175,6 @@
             align-items: center;
             justify-content: center;
             margin-right: 1rem;
-            font-size: 1.5rem;
         }
 
         .stat-icon.purple {
@@ -268,29 +197,23 @@
             color: var(--warning);
         }
 
-        .stat-info {
-            flex: 1;
-        }
-
         .stat-title {
             color: #64748b;
             font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 0.25rem;
         }
 
         .stat-value {
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--dark);
-            margin-bottom: 0.25rem;
         }
 
         .stat-change {
             display: flex;
             align-items: center;
             font-size: 0.9rem;
-            gap: 0.25rem;
+            margin-top: 0.5rem;
         }
 
         .stat-change.positive {
@@ -305,7 +228,6 @@
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 1.5rem;
-            margin-top: 2rem;
         }
 
         .card {
@@ -328,13 +250,6 @@
             color: var(--dark);
         }
 
-        .card-action {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
         .projects-list {
             list-style: none;
         }
@@ -344,10 +259,6 @@
             align-items: center;
             padding: 1rem 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .project-item:last-child {
-            border-bottom: none;
         }
 
         .project-info {
@@ -391,10 +302,6 @@
             gap: 1rem;
             padding: 1rem 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .activity-item:last-child {
-            border-bottom: none;
         }
 
         .activity-icon {
@@ -451,25 +358,11 @@
             .content-grid {
                 grid-template-columns: 1fr;
             }
-
-            .user-menu {
-                left: 100%;
-                bottom: 0;
-                margin-left: 0.5rem;
-            }
         }
 
         @media (max-width: 768px) {
             .stats-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .welcome-title {
-                font-size: 1.5rem;
-            }
-
-            .welcome-subtitle {
-                font-size: 1rem;
             }
         }
     </style>
@@ -522,7 +415,108 @@
                 </a>
             </li>
         </ul>
-        <a href="/Auth/logout" class="logout-button">
+        <div class="user-profile">
+            <div class="avatar">JD</div>
+            <div class="user-info">
+                <div class="user-name">John Doe</div>
+                <div class="user-role">Admin</div>
+            </div>
+        </div>
+        <a href="/logout" class="user-menu-item logout">
             <i class="fas fa-sign-out-alt"></i>
-            <span>Déconnexion</span>
+
+            Déconnexion
         </a>
+    </aside>
+
+    <main class="main-content">
+        <header class="header">
+            <h1 class="page-title">Tableau de bord</h1>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div>
+                        <div class="stat-title">Projets actifs</div>
+                        <div class="stat-value">45</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            12% ce mois
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div>
+                        <div class="stat-title">Freelances</div>
+                        <div class="stat-value">873</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            8% ce mois
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon green">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <div class="stat-title">Projets terminés</div>
+                        <div class="stat-value">284</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            24% ce mois
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon yellow">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div>
+                        <div class="stat-title">Revenus</div>
+                        <div class="stat-value">76.5K€</div>
+                        <div class="stat-change negative">
+                            <i class="fas fa-arrow-down"></i>
+                            3% ce mois
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Projets récents</h2>
+                </div>
+                <ul class="projects-list">
+                    <li class="project-item">
+                        <div class="project-info">
+                            <div class="project-title">Refonte site e-commerce</div>
+                            <div class="project-subtitle">Client: TechStore</div>
+                        </div>
+                        <span class="badge badge-progress">En cours</span>
+                    </li>
+
+                    <div class="card">
+                    <li class="project-item">
+                        <div class="project-info">
+                            <div class="project-title">Application mobile</div>
+                            <div class="project-subtitle">Client: FitnessPro</div>
+                        </div>
+                       <span class="badge badge-progress">En cours</span>
+                    </li>
+

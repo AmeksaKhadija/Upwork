@@ -173,9 +173,11 @@ class User
         $role = $role->findById($result->role_id);
         $result->setRole($role);
 
+
         if ($result && password_verify($password, $result->password)) {
             // var_dump($result);die();
             return $result;
+
         } else {
             return false;
         }
