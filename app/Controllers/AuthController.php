@@ -96,8 +96,8 @@ class AuthController extends Controller
                     $_SESSION['role'] = $user->getRole();
                     $_SESSION['user_id'] = $user->getId();
                     $_SESSION['user'] = $user;
-                    // var_dump($user);
-                    // die();
+                    var_dump($user);
+                    die();
                     // header('location:/');
                 }
             }
