@@ -15,7 +15,7 @@ class Router
 
     public function router()
     {
-        // var_dump($_REQUEST);
+       
         if (empty($_SERVER['REQUEST_URI'])) {
             $uri = '';
         } else {
@@ -29,8 +29,7 @@ class Router
 
             if (!empty($uri[0])) {
                 $controller = 'app\Controllers\\' . $uri[0] . 'Controller';
-                // var_dump($controller);
-                // die();
+                
                 unset($uri[0]);
                 if (class_exists($controller)) {
                     $this->controller = $controller;
