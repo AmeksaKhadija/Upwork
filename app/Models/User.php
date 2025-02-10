@@ -174,6 +174,7 @@ class User
         $result->setRole($role);
 
         if ($result && password_verify($password, $result->password)) {
+            // var_dump($result);die();
             return $result;
         } else {
             return false;
@@ -182,10 +183,13 @@ class User
 
     public function ShowProfile($user_id)
     {
+        
         $query = "select id, nom,prenom ,email, password,role_id from users where id = :id";
         $stmt = Database::getInstance()->getConnection()->prepare($query);
-        $stmt->bindParam(':id', $user_id);
+        $stmt->bindParam(':id',$user_id);
         $stmt->execute();
-        return $stmt->fetchObject(__CLASS__);
+        $result = $stmt->fetchObject(__CLASS__);
+        // var_dump($result);die;
+        return $result;
     }
 }

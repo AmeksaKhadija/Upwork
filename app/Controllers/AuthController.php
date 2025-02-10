@@ -86,19 +86,21 @@ class AuthController extends Controller
             if (empty($errors)) {
 
                 $user = $this->userModel->login($email, $password);
-                $this->render('Dashboard');
+                
                 // var_dump($user);
                 // die;
                 if ($user) {
+                    $_SESSION['id'] = $user->getId();
                     $_SESSION['nom'] = $user->getNom();
                     $_SESSION['prenom'] = $user->getPrenom();
                     $_SESSION['email'] = $user->getEmail();
                     $_SESSION['role'] = $user->getRole();
                     $_SESSION['user_id'] = $user->getId();
                     $_SESSION['user'] = $user;
-                    var_dump($user);
-                    die();
+                    // var_dump($user);
+                    // die();
                     // header('location:/');
+                    $this->render('Dashboard');
                 }
             }
         } else {

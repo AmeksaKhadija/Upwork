@@ -526,5 +526,3 @@
             <i class="fas fa-sign-out-alt"></i>
             <span>Déconnexion</span>
         </a>
-        <!-- <?php var_dump($_SESSION[$user]);
-        die; ?> -->

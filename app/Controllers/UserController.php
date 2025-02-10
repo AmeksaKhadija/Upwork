@@ -19,10 +19,11 @@ class UserController extends Controller {
     }
 
     public function ShowProfile(){
-        var_dump($_SESSION);
+        var_dump($_SESSION['user_id']);
         die;
-        $user_id = $_SESSION['user_id']->getId();
+        $user_id = $_SESSION['user_id'];
         if ($this->userModel->ShowProfile($user_id)){
+            // echo "test";
             $this->render('Profile');
         }
     }
