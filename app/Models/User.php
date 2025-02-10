@@ -162,6 +162,8 @@ class User
 
         if ($result && password_verify($password , $result->password )){
             return $result ;
+            // var_dump($result);
+            die;
         } else {
             return false;
         }
