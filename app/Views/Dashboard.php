@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,7 +84,8 @@
             font-size: 1.2rem;
         }
 
-        .nav-link:hover, .nav-link.active {
+        .nav-link:hover,
+        .nav-link.active {
             background: var(--gradient-primary);
             color: white;
         }
@@ -428,7 +430,9 @@
                 padding: 1.5rem 0.75rem;
             }
 
-            .logo, .nav-link span, .user-info {
+            .logo,
+            .nav-link span,
+            .user-info {
                 display: none;
             }
 
@@ -470,6 +474,7 @@
         }
     </style>
 </head>
+
 <body>
     <aside class="sidebar">
         <a href="/" class="logo">FreeLanceHub</a>
@@ -510,10 +515,14 @@
                     <span>Paramètres</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="/User/ShowProfile" class="nav-link">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
         </ul>
         <a href="/Auth/logout" class="logout-button">
             <i class="fas fa-sign-out-alt"></i>
             <span>Déconnexion</span>
         </a>
-
-                

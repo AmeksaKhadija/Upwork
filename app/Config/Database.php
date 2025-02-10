@@ -9,7 +9,7 @@ class Database
 {
     private static $servername = "localhost";
     private static $username = "postgres";
-    private static $password = "khadija24";
+    private static $password = "admin";
     private static $port = "5432";
     private static $dbname = "upwork";
     private static $connexion;
