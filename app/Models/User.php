@@ -1,4 +1,5 @@
 <?php
+
 namespace app\Models;
 
 use Exception;
@@ -172,7 +173,7 @@ class User
         $role = $role->findById($result->role_id);
         $result->setRole($role);
 
-        if ($result && $password == $result->password) {
+        if ($result && password_verify($password, $result->password)) {
             return $result;
         } else {
             return false;
