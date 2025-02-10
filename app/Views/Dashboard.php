@@ -510,10 +510,16 @@
                     <span>Paramètres</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="/User/ShowProfile" class="nav-link">
+                <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
         </ul>
         <a href="/Auth/logout" class="logout-button">
             <i class="fas fa-sign-out-alt"></i>
             <span>Déconnexion</span>
         </a>
-
+        <!-- <?php var_dump($_SESSION);die;?> -->
                 
