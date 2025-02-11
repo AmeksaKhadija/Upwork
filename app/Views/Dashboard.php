@@ -2,6 +2,8 @@
    
 
 
+
+
     <main class="main-content">
         <header class="header">
             <h1 class="page-title">Tableau de bord</h1>

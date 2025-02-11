@@ -30,7 +30,9 @@ public function index(){
         $user->setRole($role->findById($user->role_id));
         $tags = $this->tagModel->getAll();
         $role = $_SESSION["role"];
+
        return $this->render('Dashboard',['tags'=>$tags,'user'=>$user]);
+
     }
 
 
