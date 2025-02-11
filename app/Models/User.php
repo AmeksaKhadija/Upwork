@@ -76,12 +76,12 @@ class User
         return $this->id;
     }
 
-    public function getNom(): string
+    public function getNom()
     {
         return $this->nom;
     }
 
-    public function getPrenom(): string
+    public function getPrenom()
     {
         return $this->prenom;
     }

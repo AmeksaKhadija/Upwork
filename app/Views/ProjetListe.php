@@ -22,7 +22,7 @@
                        <span class="date-separator">•</span>
                        <span class="date-fin">Fin: <?=$projet->getDateFin()?></span>
                    </div>
-                   <div class="project-category">Catégorie: <?=$projet->catName?></div>
+                   <div class="project-category">Catégorie: <?=$projet->$name?></div>
                    <div class="project-tags">
                    <?php if (!empty($projet->getTags())): ?>
                                <?php foreach ($projet->getTags() as $tag): ?>
