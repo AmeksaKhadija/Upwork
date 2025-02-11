@@ -57,6 +57,7 @@ class AuthController extends Controller
                 $this->userModel->setRole($this->roleModel->findByName($roleName));
 
                 if ($this->userModel->create()) {
+
                     $this->render('Login');
                 }
             } else {
@@ -87,9 +88,10 @@ class AuthController extends Controller
 
                 $user = $this->userModel->login($email, $password);
                 
-                // var_dump($user);
-                // die;
+                var_dump($user);
+                die;
                 if ($user) {
+
                     $_SESSION['nom'] = $user->getNom();
                     $_SESSION['prenom'] = $user->getPrenom();
                     $_SESSION['email'] = $user->getEmail();

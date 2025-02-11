@@ -168,7 +168,7 @@ class Projet
     }
 
     public function getAll(){
-        $query="select p.* , u.nom , u.prenom , c.name as catName from projets p join users u on p.client_id = u.id join categories c on p.categorie_id = c.id";
+        $query="select p.* , u.nom , u.prenom , c.name  from projets p join users u on p.client_id = u.id join categories c on p.categorie_id = c.id";
         $stmt=Database::getInstance()->getConnection()->prepare($query);
         $stmt->execute();
         $projets = $stmt->fetchAll(PDO::FETCH_CLASS, Projet::class);
@@ -186,7 +186,7 @@ class Projet
 
 public function getMyProjets($id){
 
-    $query = "select p.* , u.nom ,u.prenom , c.name as catName from projets p join users u on p.client_id = u.id join categories c on p.categorie_id = c.id where u.id = :id ";
+    $query = "select p.* , u.nom ,u.prenom , c.name  from projets p join users u on p.client_id = u.id join categories c on p.categorie_id = c.id where u.id = :id ";
     $stmt = Database::getInstance()->getConnection()->prepare($query);
     $stmt->bindParam(':id',$id);
     $stmt->execute();

@@ -373,7 +373,7 @@
         <a href="/" class="logo">FreeLanceHub</a>
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="/Projet/getAll" class="nav-link active">
                     <i class="fas fa-th-large"></i>
                     <span>Tableau de bord</span>
                 </a>
@@ -430,12 +430,21 @@
             </li>
         </ul>
         <div class="user-profile">
+        
+            <?php  
+            // var_dump($users);
+            // die;
+             foreach ($users as $user): ?>
+
             <div class="avatar">JD</div>
             <div class="user-info">
-                <div class="user-name">John Doe</div>
-                <div class="user-role">Admin</div>
+                <div class="user-name"><?= $user->getNom()?></div>
+                <div class="user-name"><?= $user->getPrenom()?></div>
+                <div class="user-role"><?=$user->getRole()->getRoleName() ?></div>
             </div>
         </div>
+        <?php endforeach ?>
+        
         <a href="/auth/logout" class="user-menu-item logout">
             <i class="fas fa-sign-out-alt"></i>
 

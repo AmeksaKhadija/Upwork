@@ -20,7 +20,7 @@ class TagsController extends Controller
     {
         $tags = $this->tagModel->getAll();
         $role = $_SESSION["role"];
-        $this->render('Dashboard');
+        $this->render('Dashboard',['tags'=>$tags]);
     }
 
 
