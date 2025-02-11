@@ -14,7 +14,7 @@ class Projet
     private float $budget;
     private string $date_debut ;
     private string $date_fin ;
-    private Categorie $categorie;
+    private ?Categorie $categorie=null;
     private User $client;
     private string $status;
     private array $tags=[];
@@ -180,7 +180,10 @@ class Projet
             $projet->tags = $stmt->fetchAll(PDO::FETCH_CLASS, Tag::class);
         
         endforeach;
+        // var_dump($projets);
+        // die;
         return $projets;
+        
     }
 
 
@@ -195,11 +198,14 @@ public function getMyProjets($id){
     foreach($projets as $projet){
         $sql = "select t.* from tags t join projets_tags pt on t.id = pt.tag_id where pt.projet_id = :id";
         $stmt = Database::getInstance()->getConnection()->prepare($sql);
-        $stmt->bindParam(':id',$id);
+        $stmt->bindParam(':id',$projet->id);
         $stmt->execute();
-        $projet->tags = $stmt->fetchAll(PDO::FETCH_CLASS , Tag::class);
+        $tag=$stmt->fetchAll(PDO::FETCH_CLASS , Tag::class);
+        $projet->tags =$tag ;
+     
     }
-
+    // var_dump($projets[3]->tags);
+    // die();
     return $projets;
 }
 

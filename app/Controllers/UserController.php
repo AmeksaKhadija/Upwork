@@ -8,6 +8,10 @@ use app\Models\Projet;
 use app\Models\Categorie;
 use app\Models\Tag;
 
+use app\Models\Role;
+
+
+
 class UserController extends Controller
 {
     private $userModel;
@@ -30,25 +34,39 @@ class UserController extends Controller
             $this->render('Home', []);
         } else {
             $role = $_SESSION['role'];
-            
+
+
+            // var_dump($role);
+            // die;
             // $this->render('Dashboard');
-                // $this->getOne();
+                $this->getOne();
+
+
                 
             switch ($role->getId()) {
                 case 1:
                     $projets = $this->projetModel->getAll();
-                    $this->render('ProjetListe', ['$projets' => $projets]);
+
+                    
+                    $this->render('ProjetListe', ['projets' => $projets]);
+
                     break;
 
                 case 2:
 
                     $projets = $this->projetModel->getMyProjets($_SESSION['user_id']);
 
-                    $this->render('ProjetListe', ['$projets' => $projets]);
+                      
+                    $this->render('ProjetListe', ['projets' => $projets]);
                     break;
                 case 3:
 
-                    $this->render('Profile');
+                    $projets = $this->projetModel->getAll();
+                    $this->render('ProjetListe', ['projets' => $projets]);
+                    break;
+
+
+             
             }
         }
     }
@@ -67,9 +85,13 @@ class UserController extends Controller
     {
 
             $users = $this->userModel->ShowProfile($_SESSION['user_id']);
-                var_dump($users);
-                die;
-                return  $this->render('Dashboard', ['users' => $users]);
+
+            $role=new Role();
+            $users->setRole($role->findById($users->role_id));
+                // var_dump($users);
+                // die;
+                return  $this->render('Dashboard', ['user' => $users]);
+
 
       
     }

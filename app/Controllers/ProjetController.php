@@ -33,14 +33,17 @@ public function index()
         $role=$_SESSION['role'];
         $categories = $this->categories->getAll();
         $tags = $this->tags->getAll();
-         include '../app/Views/Dashboard';
+
 
         switch($role->getId()){
             case 1:
 
                 $projets = $this->projetModel->getAll();
                
-                $this->render('ProjetListe',['projets'=>$projets]);
+
+                // $this->render('ProjetListe',['projets'=>$projets]);
+
+           
                 
             break;
 
@@ -64,8 +67,10 @@ public function getAll()
     $projets = $this->projetModel->getAll();
 if($projets){
 
+
+ return   $this->render('ProjetListe',['projets'=>$projets]);
   
-   $this->render('ProjetListe',['projets'=>$projets]);
+
 }
     
 }
