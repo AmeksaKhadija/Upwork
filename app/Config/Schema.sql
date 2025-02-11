@@ -124,9 +124,27 @@ ADD COLUMN portfolio varchar(225);
 
 
 
+INSERT INTO tags (name) VALUES
+('Développement Web'),
+('Intelligence Artificielle'),
+('Blockchain'),
+('Marketing Digital'),
+('Big Data');
 
 
+INSERT INTO categories (name) VALUES
+('Technologie'),
+('Business'),
+('Marketing'),
+('Éducation'),
+('Consulting');
 
 
+INSERT INTO projets (titre, description, categorie_id) VALUES
+('Développement dun site e-commerce', 'Création dune plateforme de vente en ligne pour les petites entreprises, avec gestion de stock et interface utilisateur optimisée.', 1),
+('Optimisation des processus de production avec IA', 'Implémentation d algorithmes d intelligence artificielle pour optimiser les chaînes de production dans l industrie automobile.', 1),
+('Création d une campagne marketing digitale pour une startup', 'Conception et mise en œuvre d une stratégie marketing digitale pour attirer des clients pour une startup tech.', 3),
+('Cours en ligne sur l intelligence artificielle', 'Formation complète pour apprendre les bases de l intelligence artificielle et de ses applications pratiques.', 4),
+('Conseil stratégique pour entreprises en transformation digitale', 'Accompagnement des entreprises dans leur transformation numérique avec des conseils pratiques et stratégiques.', 5);
 
 

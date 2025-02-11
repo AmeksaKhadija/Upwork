@@ -8,10 +8,24 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+            <?php 
+            if($_SESSION["role"]->getId()!=2){
+            ?>
+                <a href="/Projet" class="nav-link">
                     <i class="fas fa-briefcase"></i>
                     <span>Projets</span>
                 </a>
+
+                <a href="/Categorie/getAll" class="nav-link">
+                <i class="fas fa-bookmark"></i>
+                <span>Categories</span>
+               </a>
+
+                <a href="/Tags/getAll" class="nav-link">
+                <i class="fas fa-tags"></i>
+                <span>Tags</span>
+               </a>
+                <?php }?>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">

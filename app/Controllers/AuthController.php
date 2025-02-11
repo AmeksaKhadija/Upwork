@@ -97,8 +97,8 @@ class AuthController extends Controller
                     $_SESSION['user_id'] = $user->getId();
                     $_SESSION['user'] = $user;
                     
-                    // header('location:/');
-                    $this->render('Dashboard');
+                     header('location:../');
+                    // $this->render('Dashboard');
                 }
             }
 

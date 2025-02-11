@@ -379,10 +379,24 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+            <?php 
+            if($_SESSION["role"]->getId()!=1){
+            ?>
+                <a href="/Projet" class="nav-link">
                     <i class="fas fa-briefcase"></i>
                     <span>Projets</span>
                 </a>
+
+                <a href="/Categorie" class="nav-link">
+                <i class="fas fa-bookmark"></i>
+                <span>Categories</span>
+               </a>
+
+                <a href="/Tags/getAll" class="nav-link">
+                <i class="fas fa-tags"></i>
+                <span>Tags</span>
+               </a>
+                <?php }?>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -422,7 +436,7 @@
                 <div class="user-role">Admin</div>
             </div>
         </div>
-        <a href="/logout" class="user-menu-item logout">
+        <a href="/auth/logout" class="user-menu-item logout">
             <i class="fas fa-sign-out-alt"></i>
 
             Déconnexion
@@ -497,26 +511,6 @@
             </div>
         </div>
 
-        <div class="content-grid">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Projets récents</h2>
-                </div>
-                <ul class="projects-list">
-                    <li class="project-item">
-                        <div class="project-info">
-                            <div class="project-title">Refonte site e-commerce</div>
-                            <div class="project-subtitle">Client: TechStore</div>
-                        </div>
-                        <span class="badge badge-progress">En cours</span>
-                    </li>
-
-                    <div class="card">
-                    <li class="project-item">
-                        <div class="project-info">
-                            <div class="project-title">Application mobile</div>
-                            <div class="project-subtitle">Client: FitnessPro</div>
-                        </div>
-                       <span class="badge badge-progress">En cours</span>
-                    </li>
-
+</main>
+</body>
+</html>

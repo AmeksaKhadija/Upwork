@@ -4,7 +4,7 @@
 
 class Router
 {
-    private $controller = 'app\Controllers\HomeController';
+    private $controller = 'app\Controllers\UserController';
     private $method = 'index';
     private $param = [];
 
