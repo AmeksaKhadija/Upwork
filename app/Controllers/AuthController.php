@@ -20,7 +20,7 @@ class AuthController extends Controller
     public function index()
     {
         // include '../app/Views/Login.php';
-        $this->render('Login');
+        $this->render('Login',[]);
     }
 
     public function signup()
@@ -58,13 +58,13 @@ class AuthController extends Controller
 
                 if ($this->userModel->create()) {
 
-                    $this->render('Login');
+                    $this->render('Login',[]);
                 }
             } else {
                 echo $errors['general'];
             }
         } else {
-            $this->render('Signup');
+            $this->render('Signup',[]);
         }
     }
 
@@ -107,7 +107,7 @@ class AuthController extends Controller
         } else {
 
             unset($_Post);
-            $this->render('Login');
+            $this->render('Login',[]);
         }
     }
 
@@ -121,7 +121,7 @@ class AuthController extends Controller
 
         // header('location: /');
 
-        $this->render('Home');
+        $this->render('Home',[]);
 
         exit();
     }

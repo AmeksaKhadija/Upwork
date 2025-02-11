@@ -13,20 +13,20 @@
           ?>
        <div class="project-item">
            <div class="project-info">
-               <div class="project-title"><?=$projet->getTitre()?></div>
-               <div class="project-description"><?=$projet->getDescription()?></div>
+               <div class="project-title">Titre du projet: <?=$projet->getTitre()?></div>
+               <div class="project-description">Description du projet<?=$projet->getDescription()?></div>
                <div class="project-details">
-                   <div class="project-budget"><?=$projet->getBudget()?></div>
+                   <div class="project-budget">Budget : <?=$projet->getBudget()?></div>
                    <div class="project-dates">
                        <span class="date-debut">Début: <?=$projet->getDateDebut()?></span>
                        <span class="date-separator">•</span>
                        <span class="date-fin">Fin: <?=$projet->getDateFin()?></span>
                    </div>
-                   <div class="project-category">Catégorie: <?=$projet->$name?></div>
+                   <div class="project-category">Catégorie: <?=$projet->name?></div>
                    <div class="project-tags">
                    <?php if (!empty($projet->getTags())): ?>
                                <?php foreach ($projet->getTags() as $tag): ?>
-                                   <span class="tag"><?= $tag->getName() ?></span>
+                                   <span class="tag"> Tags : <?= $tag->getName() ?></span>
                                <?php endforeach; ?>
                            <?php else: ?>
                                <span class="tag">Aucun tag</span>
