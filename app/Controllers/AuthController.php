@@ -20,7 +20,7 @@ class AuthController extends Controller
     public function index()
     {
         // include '../app/Views/Login.php';
-        $this->render('Login');
+        $this->render('Login',[]);
     }
 
     public function signup()
@@ -57,13 +57,15 @@ class AuthController extends Controller
                 $this->userModel->setRole($this->roleModel->findByName($roleName));
 
                 if ($this->userModel->create()) {
-                    $this->render('Login');
+
+
+                    $this->render('Login',[]);
                 }
             } else {
                 echo $errors['general'];
             }
         } else {
-            $this->render('Signup');
+            $this->render('Signup',[]);
         }
     }
 
@@ -87,9 +89,10 @@ class AuthController extends Controller
 
                 $user = $this->userModel->login($email, $password);
                 
-                // var_dump($user);
-                // die;
+                var_dump($user);
+                die;
                 if ($user) {
+
                     $_SESSION['nom'] = $user->getNom();
                     $_SESSION['prenom'] = $user->getPrenom();
                     $_SESSION['email'] = $user->getEmail();
@@ -97,15 +100,15 @@ class AuthController extends Controller
                     $_SESSION['user_id'] = $user->getId();
                     $_SESSION['user'] = $user;
                     
-                    // header('location:/');
-                    $this->render('Dashboard');
+                     header('location:../');
+                    // $this->render('Dashboard');
                 }
             }
 
         } else {
 
             unset($_Post);
-            $this->render('Login');
+            $this->render('Login',[]);
         }
     }
 
@@ -119,7 +122,7 @@ class AuthController extends Controller
 
         // header('location: /');
 
-        $this->render('Home');
+        $this->render('Home',[]);
 
         exit();
     }

@@ -21,7 +21,7 @@ class User
     private string $email;
     private string $password;
     private string $photo;
-    private Role $role;
+    private ?Role $role=null;
     private string $portfolio;
     private float $taux_horaire;
 
@@ -76,12 +76,12 @@ class User
         return $this->id;
     }
 
-    public function getNom(): string
+    public function getNom()
     {
         return $this->nom;
     }
 
-    public function getPrenom(): string
+    public function getPrenom()
     {
         return $this->prenom;
     }
@@ -102,7 +102,7 @@ class User
     }
 
 
-    public function getRole(): Role
+    public function getRole(): ?Role
     {
         return $this->role;
     }

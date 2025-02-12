@@ -14,7 +14,7 @@ class Projet
     private float $budget;
     private string $date_debut ;
     private string $date_fin ;
-    private Categorie $categorie;
+    private ?Categorie $categorie=null;
     private User $client;
     private string $status;
     private array $tags=[];
@@ -168,36 +168,44 @@ class Projet
     }
 
     public function getAll(){
-        $query="select p.* , u.nom , u.prenom , c.name as catName from projets p join users u on p.client_id = u.id join categories c on p.categorie_id = c.id";
+        $query="select p.* , u.nom , u.prenom , c.name  from projets p join users u on p.client_id = u.id join categories c on p.categorie_id = c.id";
         $stmt=Database::getInstance()->getConnection()->prepare($query);
         $stmt->execute();
         $projets = $stmt->fetchAll(PDO::FETCH_CLASS, Projet::class);
-        foreach ($projets as $projet){
+        foreach ($projets as $projet):
             $sql = "select t.* from tags t join projets_tags pt on t.id = pt.tag_id where pt.projet_id=:id";
             $stmt=Database::getInstance()->getConnection()->prepare($sql);
             $stmt->bindParam(':id',$projet->id);
             $stmt->execute();
             $projet->tags = $stmt->fetchAll(PDO::FETCH_CLASS, Tag::class);
-        }
-     
+        
+        endforeach;
+        // var_dump($projets);
+        // die;
         return $projets;
+        
     }
 
 
 public function getMyProjets($id){
 
-    $query = "select p.* , u.nom ,u.prenom , c.name as catName from projets p join users u on p.client_id = u.id join categories c on p.categorie_id = c.id where u.id = :id ";
+    $query = "select p.* , u.nom ,u.prenom , c.name  from projets p join users u on p.client_id = u.id join categories c on p.categorie_id = c.id where u.id = :id ";
     $stmt = Database::getInstance()->getConnection()->prepare($query);
+    $stmt->bindParam(':id',$id);
     $stmt->execute();
     $projets=$stmt->fetchAll(PDO::FETCH_CLASS, Projet::class);
 
     foreach($projets as $projet){
-        $sql = "select t.* from tags t join projets_tags pt on t.id = pt.tag_id where pt.projet = :id";
+        $sql = "select t.* from tags t join projets_tags pt on t.id = pt.tag_id where pt.projet_id = :id";
         $stmt = Database::getInstance()->getConnection()->prepare($sql);
+        $stmt->bindParam(':id',$projet->id);
         $stmt->execute();
-        $projet->tags = $stmt->fetchAll(PDO::FETCH_CLASS , Tag::class);
+        $tag=$stmt->fetchAll(PDO::FETCH_CLASS , Tag::class);
+        $projet->tags =$tag ;
+     
     }
-
+    // var_dump($projets[3]->tags);
+    // die();
     return $projets;
 }
 
@@ -211,16 +219,16 @@ public function delete($id)
 }
 
 
-public function getPostulerProjet($id)
-{
-    $query = "select p.* , cat.name as catName , u.nom from projets p join poropositions prs  on p.id = prs.projet_id join categories c on c.id = p.categorie_id join users u on p.client_id = u.id where prs.freelancer_id =: id";
-    $stmt = Database::getInstance()->getConnection()->prepare($query);
-    $stmt->bindParam(':id',$id);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_CLASS , Projet::class);
+// public function getPostulerProjet($id)
+// {
+//     $query = "select p.* , cat.name as catName , u.nom from projets p join poropositions prs  on p.id = prs.projet_id join categories c on c.id = p.categorie_id join users u on p.client_id = u.id where prs.freelancer_id =: id";
+//     $stmt = Database::getInstance()->getConnection()->prepare($query);
+//     $stmt->bindParam(':id',$id);
+//     $stmt->execute();
+//     $result = $stmt->fetchAll(PDO::FETCH_CLASS , Projet::class);
 
-    return $result;
-}
+//     return $result;
+// }
 
 
 

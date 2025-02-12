@@ -1,15 +1,4 @@
-
-   
-
-
-
-
-    <main class="main-content">
-        <header class="header">
-            <h1 class="page-title">Tableau de bord</h1>
-        </header>
-
-        <div class="stats-grid">
+<div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-header">
                     <div class="stat-icon purple">
@@ -71,7 +60,3 @@
                 </div>
             </div>
         </div>
-
-</main>
-</body>
-</html>
