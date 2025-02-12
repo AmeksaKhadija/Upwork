@@ -39,15 +39,15 @@ class UserController extends Controller
             // var_dump($role);
             // die;
             // $this->render('Dashboard');
-                $this->getOne();
+            $this->getOne();
 
 
-                
+
             switch ($role->getId()) {
                 case 1:
                     $projets = $this->projetModel->getAll();
 
-                    
+
                     $this->render('ProjetListe', ['projets' => $projets]);
 
                     break;
@@ -56,7 +56,7 @@ class UserController extends Controller
 
                     $projets = $this->projetModel->getMyProjets($_SESSION['user_id']);
 
-                      
+
                     $this->render('ProjetListe', ['projets' => $projets]);
                     break;
                 case 3:
@@ -64,9 +64,6 @@ class UserController extends Controller
                     $projets = $this->projetModel->getAll();
                     $this->render('ProjetListe', ['projets' => $projets]);
                     break;
-
-
-             
             }
         }
     }
@@ -75,24 +72,23 @@ class UserController extends Controller
         // var_dump($_SESSION['user_id']);
         // die;
         $user_id = $_SESSION['user_id'];
-        if ($this->userModel->ShowProfile($user_id)) {
-            // echo "test";
-            $this->render('Profile');
+        $result = $this->userModel->ShowProfile($user_id);
+        if ($result) {
+            // include '../app/Views/Profile.php';
+            $this->render('Profile', ['result' => $result]);
+            // return $result;
         }
     }
 
     public function getOne()
     {
 
-            $users = $this->userModel->ShowProfile($_SESSION['user_id']);
+        $users = $this->userModel->ShowProfile($_SESSION['user_id']);
 
-            $role=new Role();
-            $users->setRole($role->findById($users->role_id));
-                // var_dump($users);
-                // die;
-                return  $this->render('Dashboard', ['user' => $users]);
-
-
-      
+        $role = new Role();
+        $users->setRole($role->findById($users->role_id));
+        // var_dump($users);
+        // die;
+        return  $this->render('Dashboard', ['user' => $users]);
     }
 }
