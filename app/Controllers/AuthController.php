@@ -58,6 +58,7 @@ class AuthController extends Controller
 
                 if ($this->userModel->create()) {
 
+
                     $this->render('Login',[]);
                 }
             } else {

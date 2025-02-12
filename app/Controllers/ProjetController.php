@@ -34,12 +34,16 @@ public function index()
         $categories = $this->categories->getAll();
         $tags = $this->tags->getAll();
 
+
         switch($role->getId()){
             case 1:
 
                 $projets = $this->projetModel->getAll();
                
+
                 // $this->render('ProjetListe',['projets'=>$projets]);
+
+           
                 
             break;
 
@@ -63,8 +67,10 @@ public function getAll()
     $projets = $this->projetModel->getAll();
 if($projets){
 
+
  return   $this->render('ProjetListe',['projets'=>$projets]);
   
+
 }
     
 }
