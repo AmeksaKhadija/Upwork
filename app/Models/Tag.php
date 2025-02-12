@@ -62,7 +62,7 @@ class Tag
          
     
   public function create(){
-    $query = 'insert into tags (name , description ,logo) VALUES (? ,  ?)';
+    $query = 'insert into tags (name , description ,logo) VALUES (? ,  ?,?)';
     $stmt = Database::getInstance()->getConnection()->prepare($query);
     $stmt->execute([$this->name, $this->description , $this->logo]);
     if($stmt){
@@ -96,9 +96,10 @@ class Tag
         $upid=$this->id;
         $upname = $this->name;
         $updescription = $this->description;
-        $query = "update tags set name = ? , description = ? where id= ?";
+        $uplogo = $this->logo;
+        $query = "update tags set name = ? , description = ? , logo = ? where id= ?";
         $stmt =  Database::getInstance()->getConnection()->prepare($query);
-        $result=  $stmt->execute([$upname ,$updescription,$upid ]);
+        $result=  $stmt->execute([$upname ,$updescription,$uplogo,$upid ]);
         if($result){
             return true;
         }

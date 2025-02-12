@@ -373,7 +373,7 @@
         <a href="/" class="logo">FreeLanceHub</a>
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="/Projet/getAll" class="nav-link active">
+                <a href="/Projet" class="nav-link active">
                     <i class="fas fa-th-large"></i>
                     <span>Tableau de bord</span>
                 </a>
@@ -431,7 +431,10 @@
         </ul>
         <div class="user-profile">
         
-          
+          <?php
+          var_dump($user);   
+
+          ?>
 
             <div class="avatar">JD</div>
             <div class="user-info">
@@ -440,8 +443,7 @@
                 <div class="user-role"><?=$user->getRole()->getRoleName() ?></div>
             </div>
         </div>
-     
-        
+
         <a href="/auth/logout" class="user-menu-item logout">
             <i class="fas fa-sign-out-alt"></i>
 

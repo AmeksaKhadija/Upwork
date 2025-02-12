@@ -2,15 +2,17 @@
 
 <div class="content-grid">
            
-           <div class="card">
-       <div class="card-header">
-           <h2 class="card-title">Détails du projet</h2>
-       </div>
+           
+     
        <?php  
        
        foreach ($projets as $projet):
        
           ?>
+          <div class="card">
+            <div class="card-header">
+           <h2 class="card-title">Détails du projet</h2>
+       </div>
        <div class="project-item">
            <div class="project-info">
                <div class="project-title">Titre du projet: <?=$projet->getTitre()?></div>
@@ -36,5 +38,6 @@
            </div>
            <span class="badge badge-progress"><?=$projet->getStatus()?></span>
        </div>
+       </div>
        <?php endforeach;?>
-   </div>
+  

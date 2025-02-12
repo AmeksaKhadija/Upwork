@@ -10,7 +10,7 @@ class HomeController extends Controller
     {
         // include '../app/Views/Home.php';
 
-        $this->render('Home');
+        $this->render('Home',[]);
     }
 
 

@@ -60,6 +60,7 @@ class UserController extends Controller
             }
         }
     }
+    
     public function ShowProfile()
     {
         // var_dump($_SESSION['user_id']);

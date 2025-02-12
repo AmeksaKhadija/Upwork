@@ -88,8 +88,8 @@ class AuthController extends Controller
 
                 $user = $this->userModel->login($email, $password);
                 
-                var_dump($user);
-                die;
+                // var_dump($user);
+                // die;
                 if ($user) {
 
                     $_SESSION['nom'] = $user->getNom();
