@@ -78,6 +78,7 @@ class UserController extends Controller
         $result = $this->userModel->ShowProfile($user_id);
         if ($result) {
             // include '../app/Views/Profile.php';
+            $this->getOne();
             $this->render('Profile', ['result' => $result]);
             // return $result;
         }
