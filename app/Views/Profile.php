@@ -9,6 +9,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
     <style>
         /* body {
             background: -webkit-linear-gradient(left, rgb(75, 74, 90), #00c6ff);
@@ -133,27 +134,17 @@
     <main class="main-content">
 
         <body>
+
+            <div class="col-md-2">
+                <button class="profile-edit-btn" name="btnAddMore" data-bs-toggle="modal" data-bs-target="#exampleModal" data-toggle="modal">Edit Profile</button>
+            </div>
             <div class="container emp-profile">
                 <form method="post">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="profile-img">
                                 <img src="" alt="" />
-                                <div class="file btn btn-lg btn-primary">
-                                    Change Photo
-                                    <input type="file" name="file" />
-                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="profile-head">
-                                <h5>
-                                    <?= $result->getNom() . ' ' . $result->getPrenom(); ?>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
                         </div>
                     </div>
                     <div class="row">
@@ -162,8 +153,12 @@
                                 <!-- <p>WORK LINK</p> -->
                                 <a href="<?= $result->getPortfolio() ?>">Portfolio:<?= $result->getPortfolio() ?></a><br />
                                 <p>Taux horaire : <?= $result->getTauxHoraire() ?></p>
-                                <p>SKILLS</p>
-                                <p>Taux horaire : <?= $result->getCompetnace() ?></p>
+                                <?php if ($result->getCompetence()): ?>
+                                    <?php foreach ($result->getCompetence() as $competence): ?>
+                                        <p>SKILLS :<?= htmlspecialchars($competence) ?></p>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+
                                 <div class="d-flex justify-content-end mb-3">
                                     <a href="" class="btn btn-secondary" data-toggle="modal"><i
                                             class="material-icons">&#xE147;</i> <span>Add Compétance</span></a>
@@ -173,7 +168,7 @@
                         <div class="col-md-8">
                             <div class="tab-content profile-tab" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                    
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Full Name</label>
@@ -204,8 +199,47 @@
                     </div>
                 </form>
             </div>
-        </body>
 
-        
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                        </div>
+                        <div class="modal-body">
+                            <form method='POST' action="/editProfile">
+                                <div class="mb-3">
+                                    <label for="fullName" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" name="fullName" id="fullName"
+                                        aria-describedby="nomUtilisateur">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" class="form-control" name="email" id="email"
+                                        aria-describedby="nomUtilisateur">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="portfolio" class="form-label">Portfolio</label>
+                                    <input type="text" class="form-control" name="portfolio" id="portfolio"
+                                        aria-describedby="nomUtilisateur">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tauxhoraire " class="form-label">Taux horaire</label>
+                                    <input type="text" class="form-control" name="tauxhoraire " id="tauxhoraire "
+                                        aria-describedby="nomUtilisateur">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" name="submit" class=" btn btn-dark">EditProfile</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+        </body>
 
 </html>

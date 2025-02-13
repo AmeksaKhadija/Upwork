@@ -193,7 +193,7 @@ class User
     public function ShowProfile($user_id)
     {
 
-        $query = "SELECT users.nom,users.prenom,users.email,users.password,users.photo,users.taux_horaire,users.role_id,users.portfolio,competences.nom as competanceName
+        $query = "SELECT users.nom,users.prenom,users.email,users.password,users.photo,users.taux_horaire,users.role_id,users.portfolio
                     from users 
                     join freelance_competence on freelance_competence.freelance_id = users.id
                     join competences on freelance_competence.competence_id = competences.id
@@ -204,15 +204,6 @@ class User
         $result = $stmt->fetchObject(__CLASS__);
         // var_dump($result);
         // die;
-        foreach ($result as $user):
-            $query = "select * from competences join freelance_competence on competences.id = freelance_competence.competence_id where freelance_competence.freelance_id=:id";
-            $stmt = Database::getInstance()->getConnection()->prepare($query);
-            $stmt->bindParam(':id', $user->id);
-            $stmt->execute();
-            $user->competences = $stmt->fetchAll(PDO::FETCH_CLASS, Competence::class);
-
-        endforeach;
-
         return $result;
     }
 }
