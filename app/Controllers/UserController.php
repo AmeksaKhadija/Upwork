@@ -55,9 +55,11 @@ class UserController extends Controller
                 case 2:
 
                     $projets = $this->projetModel->getMyProjets($_SESSION['user_id']);
+                    $categories=$this->categories->getAll();
+                    $tags = $this->tags->getAll();
+      
 
-
-                    $this->render('ProjetListe', ['projets' => $projets]);
+                    $this->render('ProjetListe', ['projets' => $projets,'categories'=>$categories ,'tags'=>$tags]);
                     break;
                 case 3:
 

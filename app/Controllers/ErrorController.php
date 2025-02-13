@@ -13,7 +13,7 @@ class ErrorController extends Controller{
 
     public function error()
     {
-        $this->render('404');
+        $this->render('404',[]);
         // include_once '../app/Views/404.php';
         
     }

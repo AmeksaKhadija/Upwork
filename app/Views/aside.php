@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -449,4 +449,4 @@
 
             Déconnexion
         </a>
-    </aside>
+    </aside> -->

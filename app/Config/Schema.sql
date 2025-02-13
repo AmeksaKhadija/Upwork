@@ -116,13 +116,16 @@ create  table propositions(
 ALTER TABLE propositions
 ALTER COLUMN status SET DEFAULT 'pending';
 
+ALTER Table propositions 
+ADD COLUMN date_fin DATE;
+
  insert into roles (role_name,description) values ('freelancer','role freelancer');
 
  
 alter table users 
 ADD COLUMN portfolio varchar(225);
 
-
+select * from categories;
 
 INSERT INTO tags (name) VALUES
 ('Développement Web'),

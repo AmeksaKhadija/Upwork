@@ -22,7 +22,7 @@ public function index(){
 //    echo "ana hna";
       $this->getAll();
      $tags= $this->tagModel->getAll();
-      $this->render('TagListe',['tags'=>$tags],['tags'=>$tags]);
+      $this->render('TagListe',['tags'=>$tags]);
 }
 
     public function getAll()
@@ -77,7 +77,16 @@ public function index(){
     }
 
 
+    public function delete($id)
+    {
+        $delete = $this->tagModel->delete($id);
 
+        if ($delete) {
+
+            header('Location:../');
+            exit();
+        }
+    }
 
 
 }
