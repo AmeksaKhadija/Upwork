@@ -122,7 +122,9 @@ class Projet
 
     public function setDateFin($date_fin): void
     {
-        $this->date_debut = $date_fin;
+
+        $this->date_fin=$date_fin;
+
     }
 
     public function setBudget($budget): void
@@ -133,31 +135,62 @@ class Projet
     public function create()
     {
 
-        $cat = $this->categorie->searchByName($this->categorie->getName());
-        $client = $this->getClient()->getId();
 
-        $query = "insert into projets (titre,description,budget,date_debut,date_fin,categorie_id,client_id,status)
-                values (:titre, :description, :budget, :date_debut , :date_fin ,:categorie_id,:client_id , :status)";
+  
+    $client= $this->getClient()->getId();
+
+        $query="insert into projets (titre,description,budget,date_debut,date_fin,categorie_id,client_id)
+                values (?, ?, ?, ? , ? ,?,? )";
         $stmt = Database::getInstance()->getConnection()->prepare($query);
-        $stmt->bindParam(':titre', $this->titre);
-        $stmt->bindParam(':description', $this->description);
-        $stmt->bindParam(':budget', $this->budget);
-        $stmt->bindParam(':date_debut', $this->date_debut);
-        $stmt->bindParam(':date_fin', $this->date_fin);
-        $stmt->bindParam(':categorie_id', $cat->getId());
-        $stmt->bindParam(':client_id', $client);
-        if ($stmt->execute()) {
+        $cat = $this->categorie->searchByName($this->categorie->getName());
+        // $stmt->bindParam(':titre',);
+        // $stmt->bindParam(':description',);
+        // $stmt->bindParam(':budget',);
+        // $stmt->bindParam(':date_debut',);
+        // $stmt->bindParam(':date_fin',);
+        // $stmt->bindParam(':categorie_id',);
+        // $stmt->bindParam(':client_id',);
+        // $stmt->bindParam(':status',$this->status);
+       if($stmt->execute([$this->titre,$this->description,$this->budget,$this->date_debut,$this->date_fin,$cat->getId(),$client])) {
+         
+        $id=Database::getInstance()->getConnection()->lastInsertId();
 
-            $id = Database::getInstance()->getConnection()->lastInsertId();
+        foreach($this->tags as $tag){
+            $tagId = $tag->getId();
 
-            foreach ($this->tags as $tag) {
-                $tagId = $tag->getId();
+            $sql= "insert into projets_tags (projet_id , tag_id) values (? , ?)";
+            $stmt=Database::getInstance()->getConnection()->prepare($sql);
+            // $stmt->bindParam(':project_id',);
+            // $stmt->bindParam(':tag_id',);
+            $stmt->execute([$id,$tagId]);
 
-                $sql = "insert into projets_tags (projet_id , tag_id) values (:projet_id , :tag_id)";
-                $stmt = Database::getInstance()->getConnection()->prepare($sql);
-                $stmt->bindParam(':project_id', $id);
-                $stmt->bindParam(':tag_id', $tagId);
-            }
+
+//         $cat = $this->categorie->searchByName($this->categorie->getName());
+//         $client = $this->getClient()->getId();
+
+//         $query = "insert into projets (titre,description,budget,date_debut,date_fin,categorie_id,client_id,status)
+//                 values (:titre, :description, :budget, :date_debut , :date_fin ,:categorie_id,:client_id , :status)";
+//         $stmt = Database::getInstance()->getConnection()->prepare($query);
+//         $stmt->bindParam(':titre', $this->titre);
+//         $stmt->bindParam(':description', $this->description);
+//         $stmt->bindParam(':budget', $this->budget);
+//         $stmt->bindParam(':date_debut', $this->date_debut);
+//         $stmt->bindParam(':date_fin', $this->date_fin);
+//         $stmt->bindParam(':categorie_id', $cat->getId());
+//         $stmt->bindParam(':client_id', $client);
+//         if ($stmt->execute()) {
+
+//             $id = Database::getInstance()->getConnection()->lastInsertId();
+
+//             foreach ($this->tags as $tag) {
+//                 $tagId = $tag->getId();
+
+//                 $sql = "insert into projets_tags (projet_id , tag_id) values (:projet_id , :tag_id)";
+//                 $stmt = Database::getInstance()->getConnection()->prepare($sql);
+//                 $stmt->bindParam(':project_id', $id);
+//                 $stmt->bindParam(':tag_id', $tagId);
+//             }
+
         }
 
         return true;

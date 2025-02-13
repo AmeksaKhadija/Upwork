@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
+
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de bord | FreeLanceHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
@@ -21,6 +21,7 @@
             --error: #ef4444;
             --gradient-primary: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
         }
+
 
         * {
             margin: 0;
@@ -330,6 +331,222 @@
             font-size: 0.8rem;
             color: #64748b;
         }
+     
+
+        .action-btn {
+            padding: 0.5rem;
+            border-radius: 8px;
+            color: #64748b;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: #f8fafc;
+            color: var(--primary);
+        }
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .add-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #64748b;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: white;
+        }
+
+        .form-select[multiple] {
+            padding: 8px;
+            width: 100%;
+            min-height: 120px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .form-select[multiple] option {
+            padding: 8px;
+            margin: 2px 0;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /* .form-select[multiple] option:hover {
+            background-color: #f0f0f0;
+        }
+
+        .form-select[multiple] option:checked {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        } */
+
+
+
+
+        .logout-button {
+            margin-top: auto;
+            margin-bottom: 2rem;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--error);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: none;
+            background: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+        }
+
+        .logout-button:hover {
+            background: var(--error);
+            color: white;
+        }
+
+        .logout-button i {
+            width: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            .logout-button {
+                padding: 1rem;
+                justify-content: center;
+            }
+
+            .logout-button span {
+                display: none;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 80px;
+                padding: 1rem 0;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+                padding: 0 1rem;
+            }
+
+            .menu-item span {
+                display: none;
+            }
+
+            .menu-item {
+                padding: 1rem;
+                justify-content: center;
+            }
+
+            .main-content {
+                margin-left: 80px;
+            }
+        }
+
+
+        /*  */
 
         @media (max-width: 1024px) {
             .sidebar {
@@ -373,7 +590,7 @@
         <a href="/" class="logo">FreeLanceHub</a>
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="/Projet/getAll" class="nav-link active">
+                <a href="/" class="nav-link active">
                     <i class="fas fa-th-large"></i>
                     <span>Tableau de bord</span>
                 </a>
@@ -392,7 +609,7 @@
                 <span>Categories</span>
                </a>
 
-                <a href="/Tags/getAll" class="nav-link">
+                <a href="/Tags" class="nav-link">
                 <i class="fas fa-tags"></i>
                 <span>Tags</span>
                </a>
@@ -422,12 +639,16 @@
                     <span>Paramètres</span>
                 </a>
             </li>
+            <?php 
+            if($_SESSION["role"]->getId()===3){
+            ?>
             <li class="nav-item">
                 <a href="/User/ShowProfile" class="nav-link">
                     <i class="fa-solid fa-user"></i>
                     <span>Profile</span>
                 </a>
             </li>
+            <?php }?>
         </ul>
         <div class="user-profile">
         
@@ -447,16 +668,14 @@
 
             Déconnexion
         </a>
-    </aside>
-   
-
-
+    </aside> 
 
 <!-- 
+
     <main class="main-content">
         <header class="header">
             <h1 class="page-title">Tableau de bord</h1>
-        </header>
+        </header> 
 
         <div class="stats-grid">
             <div class="stat-card">

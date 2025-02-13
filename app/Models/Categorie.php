@@ -95,4 +95,26 @@ class Categorie{
             return $result;
         }
      }
+
+
+
+
+     public function update(){
+
+        $id=$this->getId();
+        $upname = $this->getNAme();
+        $updescription = $this->getDescription();
+        $query = "update categories set name = :name , description = :description where id= :id";
+        $stmt =  Database::getInstance()->getConnection()->prepare($query);
+        $stmt->bindParam(':id',$id);
+        $stmt->bindParam(':name',$upname);
+        $stmt->bindParam(':description',$updescription);
+        $result=  $stmt->execute();
+
+        if($result){
+            return true;
+        }
+
+
+    }
 }

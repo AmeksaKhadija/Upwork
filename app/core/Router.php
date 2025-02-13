@@ -1,7 +1,4 @@
 <?php
-
-
-
 class Router
 {
     private $controller = 'app\Controllers\UserController';

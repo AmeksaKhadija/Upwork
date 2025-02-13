@@ -50,14 +50,12 @@ public function index()
             case 2:
 
                 $projets = $this->projetModel->getMyProjets($_SESSION['user_id']);
-              
-                $this->render('ProjetListe',['projets'=>$projets]);
+              $categories=$this->categories->getAll();
+              $tags = $this->tags->getAll();
+
+                $this->render('ProjetListe',['projets'=>$projets,'categorie'=>$categories ,'tags'=>$tags]);
              break;
-
         }
-
-
-
     }
 }
 
@@ -77,15 +75,22 @@ if($projets){
 
 public function add()
 {
-    if(isset($_Post['submit']) && !empty($_POST['titre']) && !empty(['description']) && !empty($_POST['budget']) && !empty($_POST['date_debut']) && !empty($_POST['date_fin'])&& !empty($_POST['categorie'])){
-
+    
+    if(isset($_POST['submit']) &&  !empty($_POST['titre']) && !empty(['description']) && !empty($_POST['budget']) && !empty($_POST['date_debut']) && !empty($_POST['date_fin'])&& !empty($_POST['categorie'])){
+          // var_dump($_POST["tags"]);
+            // die;
         $tags = array();
 
         foreach($_POST['tags'] as $tagId){
+            // var_dump($tagId);
             $tag = new tag();
             $tag->setId($tagId);
             array_push($tags,$tag);
         }
+        
+
+ 
+
      $this->projetModel->setTitre($_POST['titre']);
      $this->projetModel->setDescription($_POST['description']);
      $this->projetModel->setBudget($_POST['budget']);
@@ -94,16 +99,18 @@ public function add()
      $this->projetModel->setClient($_SESSION['user']);
      $this->projetModel->setCategorie($this->categories->getById($_POST['categorie']));
      $this->projetModel->setTags($tags);
-      
+
      $result = $this->projetModel->create();
+     header("Location: ".$_SERVER['HTTP_REFERER']);//katrej3ek lpage li kenti fiha 
+        //    var_dump($result);
+        //     die;
 
-
-     if ($result){
-        header('Location: ../Dashboard');
-        exit();
-     }else {
-        echo "Erreur lors de l'ajout de la catégorie.";
-     }
+    //  if ($result){
+    //     header('Location: ../Projet');
+    //     exit();
+    //  }else {
+    //     echo "Erreur lors de l'ajout du projet.";
+    //  }
 
     }
 }
