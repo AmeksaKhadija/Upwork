@@ -1,8 +1,5 @@
 
 
-<!DOCTYPE html>
-<html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,6 +21,7 @@
             --error: #ef4444;
             --gradient-primary: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
         }
+
 
         * {
             margin: 0;
@@ -671,6 +669,9 @@
             Déconnexion
         </a>
     </aside> 
+
+<!-- 
+
     <main class="main-content">
         <header class="header">
             <h1 class="page-title">Tableau de bord</h1>
@@ -739,6 +740,6 @@
             </div>
         </div>
 
-</main>
+</main> -->
 </body>
 </html>

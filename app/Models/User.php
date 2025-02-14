@@ -6,6 +6,7 @@ use Exception;
 use PDO;
 use app\Config\Database;
 use app\Models\Role;
+use app\Models\Competence;
 
 
 #[\AllowDynamicProperties]
@@ -21,10 +22,10 @@ class User
     private string $email;
     private string $password;
     private string $photo;
-    private ?Role $role=null;
+    private ?Role $role = null;
     private string $portfolio;
     private float $taux_horaire;
-
+    private array $competences = [];
 
     public function __construct() {}
 
@@ -117,8 +118,15 @@ class User
         return $this->portfolio;
     }
 
+    public function getCompetence(): array
+    {
+        return $this->competences;
+    }
 
-
+    public function setCompetence(array $competences): void
+    {
+        $this->competences = $competences;
+    }
     // public function __toString()
     // {
     //      return "(Utilisateur) => id : " . $this->id . " , nom : " . $this->nom . 
@@ -177,7 +185,6 @@ class User
         if ($result && password_verify($password, $result->password)) {
             // var_dump($result);die();
             return $result;
-
         } else {
             return false;
         }
@@ -185,13 +192,18 @@ class User
 
     public function ShowProfile($user_id)
     {
-        
-        $query = "select id, nom,prenom ,email, password,role_id from users where id = :id";
+
+        $query = "SELECT users.nom,users.prenom,users.email,users.password,users.photo,users.taux_horaire,users.role_id,users.portfolio
+                    from users 
+                    join freelance_competence on freelance_competence.freelance_id = users.id
+                    join competences on freelance_competence.competence_id = competences.id
+                    WHERE users.id = :id";
         $stmt = Database::getInstance()->getConnection()->prepare($query);
-        $stmt->bindParam(':id',$user_id);
+        $stmt->bindParam(':id', $user_id);
         $stmt->execute();
         $result = $stmt->fetchObject(__CLASS__);
-        // var_dump($result);die;
+        // var_dump($result);
+        // die;
         return $result;
     }
 }
