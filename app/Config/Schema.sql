@@ -18,6 +18,11 @@ create Table roles (
     role_name  varchar(225),
     description VARCHAR(225)
 );
+ALTER TABLE users
+  DROP CONSTRAINT users_role_id_fkey, 
+  ADD CONSTRAINT fk_users_role_id_fkey FOREIGN KEY (role_id)
+  REFERENCES users(id)
+  ON DELETE CASCADE;
 
 create table competences (
     id SERIAL PRIMARY key ,
@@ -33,6 +38,20 @@ CREATE TABLE freelance_competence (
     FOREIGN KEY (competence_id) REFERENCES competences (id),
     PRIMARY KEY (freelance_id, competence_id)
 );
+
+ALTER TABLE freelance_competence
+  DROP CONSTRAINT freelance_competence_freelance_id_fkey, 
+  ADD CONSTRAINT fk_freelance_competence_freelance_id FOREIGN KEY (freelance_id)
+  REFERENCES users(id)
+  ON DELETE CASCADE;
+
+
+ALTER TABLE freelance_competence
+  DROP CONSTRAINT freelance_competence_competence_id_fkey, 
+  ADD CONSTRAINT fk_freelance_competence_competence_id FOREIGN KEY (competence_id)
+  REFERENCES competences(id)
+  ON DELETE CASCADE;
+
 
 CREATE table categories (
      id SERIAL PRIMARY KEY ,
@@ -61,6 +80,18 @@ CREATE TYPE status AS ENUM ('à faire','en cours','terminé');
     FOREIGN KEY (client_id) REFERENCES users (id),
     FOREIGN KEY (categorie_id) REFERENCES categories (id)
 );
+
+ALTER TABLE projets
+  DROP CONSTRAINT projets_client_id_fkey,  
+  ADD CONSTRAINT fk_projets_client_id FOREIGN KEY (client_id)
+  REFERENCES users(id)
+  ON DELETE CASCADE;
+
+  ALTER TABLE projets
+  DROP CONSTRAINT projets_categorie_id_fkey,  
+  ADD CONSTRAINT fk_projets_categorie_id FOREIGN KEY (categorie_id)
+  REFERENCES categories(id)
+  ON DELETE CASCADE;
 ALTER TABLE projets
 ALTER COLUMN status SET DEFAULT 'à faire';
 
@@ -71,6 +102,20 @@ CREATE TABLE projets_tags (
     FOREIGN KEY (tag_id) REFERENCES tags (id),
     PRIMARY KEY (projet_id, tag_id)
 ) ;
+
+
+ALTER TABLE projets_tags
+  DROP CONSTRAINT projets_tags_projet_id_fkey,  
+  ADD CONSTRAINT fk_projets_tags_projet_id FOREIGN KEY (projet_id)
+  REFERENCES projets(id)
+  ON DELETE CASCADE;
+
+
+ALTER TABLE projets_tags
+  DROP CONSTRAINT projets_tags_tag_id_fkey,  
+  ADD CONSTRAINT fk_projets_tags_tag_id FOREIGN KEY (tag_id)
+  REFERENCES tags(id)
+  ON DELETE CASCADE;
 
 create type paiement_status as ENUM ('Non payé','payé');
 CREATE table paiements(
@@ -94,6 +139,19 @@ create table messages(
     FOREIGN KEY (sender_id) REFERENCES users (id),
     FOREIGN KEY (receiver_id) REFERENCES users (id)
 );
+ALTER TABLE paiements
+  DROP CONSTRAINT paiements_paye_id_fkey,  
+  ADD CONSTRAINT fk_paiements_paye_id FOREIGN KEY (paye_id)
+  REFERENCES users(id)
+  ON DELETE CASCADE;
+
+ALTER TABLE paiements
+  DROP CONSTRAINT paiements_payeur_id_fkey, 
+  ADD CONSTRAINT fk_paiements_payeur_id FOREIGN KEY (payeur_id)
+  REFERENCES users(id)
+  ON DELETE CASCADE;
+
+
 
 create table reviews (
     id SERIAL PRIMARY key ,
@@ -113,6 +171,20 @@ create  table propositions(
     FOREIGN KEY (projet_id) REFERENCES projets (id)
 
 );
+
+ALTER TABLE propositions
+  DROP CONSTRAINT propositions_freelance_id_fkey,  
+  ADD CONSTRAINT fk_propositions_freelance_id FOREIGN KEY (freelance_id)
+  REFERENCES users(id)
+  ON DELETE CASCADE;
+
+  ALTER TABLE propositions
+  DROP CONSTRAINT propositions_projet_id_fkey,  
+  ADD CONSTRAINT fk_propositions_projet_id FOREIGN KEY (projet_id)
+  REFERENCES projets(id)
+  ON DELETE CASCADE;
+
+
 ALTER TABLE propositions
 ALTER COLUMN status SET DEFAULT 'pending';
 

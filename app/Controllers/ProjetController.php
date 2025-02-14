@@ -123,10 +123,50 @@ public function delete($id)
 
 
     if ($delete){
-        header('Location:../');
+        header("Location: ".$_SERVER['HTTP_REFERER']);
         exit();
 
     }
 }
+
+public function update(){
+
+
+if($_SERVER['REQUEST_METHOD']){
+    $categorie = new Categorie();
+    
+    $categorie->setId($_POST["categorie_id"]);
+    $tags = [];
+    foreach ($_POST["tags"] as $tagId) {
+        $tag = new Tag();
+        $tag->setId($tagId);
+        array_push($tags, $tag);
+    }
+    $this->projetModel->setTitre($_POST['titre']);
+    $this->projetModel->setDescription($_POST['description']);
+    $this->projetModel->setBudget($_POST['budget']);
+    $this->projetModel->setDateDebut($_POST['date_debut']);
+    $this->projetModel->setDateFin($_POST['date_fin']);
+    $this->projetModel->setCategorie($categorie);
+    $this->projetModel->setTags($tags);
+    $this->projetModel->setId($_GET['id']);
+    $this->projetModel->update();
+    header("Location: ".$_SERVER['HTTP_REFERER']);
+
+
+}
+
+
+
+
+
+
+
+}
+
+
+
+
+
 
 }

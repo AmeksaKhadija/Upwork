@@ -107,7 +107,6 @@
             document.getElementById(modalId).style.display = 'none';
         }
 
-        // Fermer le modal si on clique en dehors
         window.onclick = function(event) {
             if (event.target.className === 'modal') {
                 event.target.style.display = 'none';
@@ -121,7 +120,7 @@ function closeModal(modalId) {
     document.getElementById(modalId).style.display = 'none';
 }
 
-// Fermer le modal si on clique en dehors
+
 window.onclick = function(event) {
     if (event.target.classList.contains('modal')) {
         event.target.style.display = 'none';

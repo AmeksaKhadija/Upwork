@@ -221,6 +221,41 @@ public function delete($id)
 }
 
 
+
+public function update()
+     {
+         $categorie = $this->categorie->getId();
+         $query = "UPDATE projet SET titre = :titre, description =:description, budget=:budget,date_debut=:date_debut,date_fin=:date_fin ,categorie_id = :categorie_id WHERE id = :id";
+         $stmt = Database::getInstance()->getConnection()->prepare($query);
+         $stmt->bindParam(":title", $this->titre);
+         $stmt->bindParam(":description", $this->description);
+         $stmt->bindParam(":budget", $this->budget);
+         $stmt->bindParam(":date_debut", $this->date_debut);
+         $stmt->bindParam(":date_fin", $this->date_fin);
+         $stmt->bindParam(":categorie_id", $categorie);
+         $stmt->bindParam(":id", $this->id);
+         if ($stmt->execute()) {
+             $stmt = Database::getInstance()->getConnection()->prepare("DELETE FROM projet_tag WHERE projet_id = :id");
+             $stmt->bindParam(":id", $this->id);
+             $stmt->execute();
+             foreach ($this->tags as $tag) {
+                 $tagId = $tag->getId();
+                 $query = "Iinsert into projets_tags (projet_id , tag_id) values (? , ?)";
+                 $stmt = Database::getInstance()->getConnection()->prepare($query);
+
+                //  $stmt->bindParam(":tag_id", $tagId);
+                //  $stmt->bindParam(":projet_id", $this->id);
+
+                $stmt->execute([$this->id,$tagId]);
+             }
+ 
+             return true;
+         }
+ 
+         return false;
+     }
+
+
 // public function getPostulerProjet($id)
 // {
 //     $query = "select p.* , cat.name as catName , u.nom from projets p join poropositions prs  on p.id = prs.projet_id join categories c on c.id = p.categorie_id join users u on p.client_id = u.id where prs.freelancer_id =: id";
