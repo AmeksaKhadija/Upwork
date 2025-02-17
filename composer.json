@@ -1,0 +1,15 @@
+{
+    "name": "youcode/upwork",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ameksa khadija",
+            "email": "ameksakhadija026@gmail.com"
+        }
+    ],
+    "require": {}
+}
